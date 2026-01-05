@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Harmonious Blue-Gray Scale (Hue 218 matches Primary) */
+    --background: 0 0% 100%;
+    /* Pure white for cleaner look */
+    --foreground: 218 40% 10%;
+    /* Dark blue-black for text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 12 100% 100%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 218 40% 10%;
+
+    /* Primary: Deep Brand Blue */
+    --primary: 218 57% 25%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Secondary: Light Blue-Gray */
+    --secondary: 218 30% 94%;
+    --secondary-foreground: 218 57% 25%;
+
+    /* Muted: Subtle Blue-Gray */
+    --muted: 218 30% 94%;
+    --muted-foreground: 218 15% 45%;
+
+    /* Accent: Interactive Blue-Gray */
+    --accent: 218 30% 94%;
+    --accent-foreground: 218 57% 25%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Borders: Crisp Blue-Gray */
+    --border: 218 25% 88%;
+    --input: 218 25% 88%;
+    --ring: 218 57% 25%;
+    /* Match primary for ring */
+
+    --radius: 0.5rem;
+
+    /* Legacy brand names */
+    --primary-hex: #1b3764;
+    --primary-light: #2a4c84;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+
+    --sidebar-width: 280px;
+    --header-height: 80px;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    --shadow-lg: 0 10px 15px -3px rgba(27, 55, 100, 0.1), 0 4px 6px -4px rgba(27, 55, 100, 0.1);
+
+    --glass: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+  }
+
+  .dark {
+    /* Base colors - using HSL components for hsl() function compatibility */
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 4%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 5%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary - Vibrant Accent */
+    --primary: #ffffff;
+    --primary-foreground: 222 47% 11.2%;
+
+    /* Secondary */
+    --secondary: 217 33% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    /* Muted */
+    --muted: 217 33% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    /* Accent */
+    --accent: 217.2 91.2% 59.8%;
+    --accent-foreground: 210 40% 98%;
+
+    /* Destructive */
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Borders & inputs */
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 213 27% 84%;
+
+    /* Custom HEX-based theme tokens */
+    --primary-hex: #0f172a;
+    /* Deep Slate for Sidebar */
+    --primary-light: #1e293b;
+    --text-primary: #ffffff;
+    --text-secondary: #9e9e9e;
+    --text-muted: #64748b;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+}
+
+/* Legacy Layout Styles */
+.app-container {
+  display: flex;
+  height: 100vh;
+  padding: 12px;
+  gap: 12px;
+  background-color: var(--primary-hex);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: hsl(var(--background));
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  transition: all 0.3s ease;
+}
+
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+/* Responsive Utilities */
+.show-on-mobile {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 240px;
+  }
+
+  .app-container {
+    padding: 0;
+    gap: 0;
+  }
+
+  .main-content {
+    border-radius: 0;
+    width: 100%;
+  }
+
+  .content-area {
+    padding: 16px;
+  }
+
+  .sidebar-container {
+    position: fixed !important;
+    left: -100% !important;
+    top: 0 !important;
+    height: 100vh !important;
+    width: 280px !important;
+    z-index: 1000 !important;
+    background-color: var(--primary-hex) !important;
+    transition: left 0.3s ease-in-out !important;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .sidebar-container.open {
+    left: 0 !important;
+  }
+
+  .show-on-mobile {
+    display: block !important;
+  }
+
+  /* Table responsiveness */
+  .file-list-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-search {
+    display: none !important;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-dark {
+  background: rgba(27, 55, 100, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.text-h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.spinner {
+  border: 3px solid rgba(27, 55, 100, 0.1);
+  border-top: 3px solid var(--primary-hex);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
